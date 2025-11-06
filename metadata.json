@@ -1,0 +1,5 @@
+{
+  "name": "Electron Wave-Particle Duality Explorer",
+  "description": "An interactive web application demonstrating the wave-particle duality of the electron, a fundamental concept in quantum physics. Explore its behaviors, key experiments, and real-world applications through visually engaging animations and explanations.",
+  "requestFramePermissions": []
+}
