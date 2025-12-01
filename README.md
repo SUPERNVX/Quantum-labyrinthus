@@ -25,8 +25,11 @@ This project serves as an educational tool to visualize the concept of quantum s
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg" height="40" alt="Tailwind CSS" title="Tailwind CSS"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="JavaScript" title="JavaScript"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" alt="HTML5" title="HTML5"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canvas/canvas-original.svg" height="40" alt="Canvas" title="Canvas"/>
 </div>
+
+## 🌐 Live Preview
+
+You can view the deployed application here: [Quantum Labyrinthus on GitHub Pages](https://supernvx.github.io/Quantum-labyrinthus/)
 
 ## ⚙️ How to Run Locally
 
