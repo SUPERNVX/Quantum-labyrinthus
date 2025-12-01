@@ -1,58 +1,49 @@
 # Quantum Labyrinthus
 
-Uma simulação visual interativa que demonstra a diferença fundamental entre algoritmos de resolução de labirintos clássicos e inspirados em computação quântica.
+An interactive visual simulation that demonstrates the fundamental difference between classical and quantum-inspired maze solving algorithms.
 
-Este projeto serve como uma ferramenta educacional para visualizar o conceito de superposição e paralelismo quântico de uma forma simples e tangível.
+This project serves as an educational tool to visualize the concept of quantum superposition and parallelism in a simple and tangible way.
 
-![Screenshot da Aplicação](Screenshot%202025-11-03%20175820.png)
+![Screenshot of the Application](public/print.png)
 
 ---
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-*   **Visualização Comparativa:** Assista a um algoritmo clássico (Busca em Profundidade - DFS) e um algoritmo de inspiração quântica (Busca em Largura - BFS) resolverem labirintos idênticos lado a lado.
-*   **Múltiplos Tamanhos de Labirinto:** Alterne entre labirintos de diferentes tamanhos para observar como a complexidade afeta a eficiência de cada abordagem.
-*   **Modo Contínuo:** Deixe os algoritmos resolverem labirintos gerados aleatoriamente em sequência para coletar estatísticas de desempenho.
-*   **Estatísticas em Tempo Real:** Um placar exibe o número de labirintos resolvidos, o tempo médio de solução e a diferença de velocidade entre os dois computadores.
-*   **Geração de Labirinto Avançada:** Os labirintos são gerados com conexões extras para criar múltiplos caminhos, destacando a vantagem do paralelismo quântico.
+*   **Comparative Visualization:** Watch a classical algorithm (Depth-First Search - DFS) and a quantum-inspired algorithm (Breadth-First Search - BFS) solve identical mazes side by side.
+*   **Multiple Maze Sizes:** Switch between mazes of different sizes to observe how complexity affects the efficiency of each approach.
+*   **Continuous Mode:** Let the algorithms solve randomly generated mazes in sequence to collect performance statistics.
+*   **Real-time Statistics:** A scoreboard displays the number of mazes solved, average solution time, and speed difference between the two solvers.
+*   **Advanced Maze Generation:** Mazes are generated with extra connections to create multiple paths, highlighting the advantage of quantum parallelism.
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
-*   **Frontend:** React, TypeScript
-*   **Build Tool:** Vite
-*   **Estilização:** Tailwind CSS
-*   **Computação Paralela (Simulada):** Web Workers para o solver quântico.
-*   **Renderização:** HTML5 Canvas para uma animação de alta performance.
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="React" title="React"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="TypeScript" title="TypeScript"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg" height="40" alt="Vite" title="Vite"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg" height="40" alt="Tailwind CSS" title="Tailwind CSS"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="JavaScript" title="JavaScript"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" alt="HTML5" title="HTML5"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canvas/canvas-original.svg" height="40" alt="Canvas" title="Canvas"/>
+</div>
 
-## ⚙️ Como Executar Localmente
+## ⚙️ How to Run Locally
 
-1.  **Clone o repositório:**
+1.  **Clone the repository:**
     ```bash
     git clone https://github.com/seu-usuario/Quantum-labyrinthus.git
     cd Quantum-labyrinthus
     ```
 
-2.  **Instale as dependências:**
+2.  **Install dependencies:**
     ```bash
     npm install
     ```
 
-3.  **Inicie o servidor de desenvolvimento:**
+3.  **Start the development server:**
     ```bash
     npm run dev
     ```
 
-    A aplicação estará disponível em `http://localhost:5173` (ou em outra porta, se a 5173 estiver em uso).
-
-## 📦 Deploy
-
-O projeto está configurado para deploy no GitHub Pages.
-
-1.  **Faça o build do projeto:**
-    ```bash
-    npm run build
-    ```
-
-2.  O conteúdo da pasta `dist` é o que deve ser servido pelo GitHub Pages.
-
-**Importante:** O arquivo `vite.config.ts` está configurado com `base: '/Quantum-labyrinthus/'`. Se o nome do seu repositório for diferente, ajuste este valor antes de fazer o build.
+    The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
