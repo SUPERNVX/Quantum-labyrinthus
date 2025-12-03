@@ -58,7 +58,7 @@ const MazeCanvasGrid: React.FC<MazeCanvasGridProps> = ({ state, config, width, h
                     cellType = 'start';
                 } else if (r === config.END.row && c === config.END.col) {
                     cellType = 'end';
-                } else if (state.classicalPath.some((p: {row: number, col: number}) => p.row === r && p.col === c)) {
+                } else if (state.classicalPath.some((p: { row: number, col: number }) => p.row === r && p.col === c)) {
                     cellType = 'classical-path';
                 } else if (state.classicalDeadEnds.has(id)) {
                     cellType = 'classical-deadend';
@@ -67,7 +67,7 @@ const MazeCanvasGrid: React.FC<MazeCanvasGridProps> = ({ state, config, width, h
                 } else {
                     cellType = 'path';
                 }
-                
+
                 const colorMap: Record<CellType, string> = {
                     wall: '#4A5568', // gray-600
                     path: '#1A202C', // gray-800
@@ -88,7 +88,7 @@ const MazeCanvasGrid: React.FC<MazeCanvasGridProps> = ({ state, config, width, h
 
     }, [state, config, width, height]); // Redraw whenever state or config changes
 
-    return <canvas ref={canvasRef} width={width} height={height} className="aspect-square" />;
+    return <canvas ref={canvasRef} width={width} height={height} className="max-w-full h-auto aspect-square" />;
 };
 
 export { MazeCanvasGrid };

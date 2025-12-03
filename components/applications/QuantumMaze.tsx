@@ -3,21 +3,21 @@ import React, { useState, useEffect, useRef } from 'react';
 // --- MAZE CONFIGURATIONS ---
 
 const SMALL_MAZE = {
-  GRID: [
-    [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 1, 1, 1, 1, 1, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [1, 0, 1, 1, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 1, 0, 1, 1, 0],
-  ],
-  START: { row: 0, col: 0 },
-  END: { row: 9, col: 9 },
-  DIMENSIONS: 10,
+    GRID: [
+        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [1, 0, 1, 1, 0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 1, 0, 1, 1, 0],
+    ],
+    START: { row: 0, col: 0 },
+    END: { row: 9, col: 9 },
+    DIMENSIONS: 10,
 };
 
 const LARGE_MAZE = {
@@ -72,9 +72,9 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
     const solveStartTime = useRef<number>(0);
     const classicalFound = useRef<boolean>(false);
     const quantumFound = useRef<boolean>(false);
-    
+
     const [solvingMode, setSolvingMode] = useState<'both' | 'classical' | 'quantum'>('both');
-    
+
     const config = mazeSize === 'small' ? SMALL_MAZE : LARGE_MAZE;
 
     const solveClassical = () => {
@@ -92,7 +92,7 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                 if (stack.length > 0) {
                     path = stack[stack.length - 1];
                     const current = path[path.length - 1];
-                    
+
                     if (current.row === END.row && current.col === END.col) {
                         classicalFound.current = true;
                         const endTime = performance.now();
@@ -128,14 +128,14 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                     setClassicalDeadEnds(new Set(deadEnds));
                 }
             }
-            
+
             if (!classicalFound.current) {
                 animationFrameId.current = requestAnimationFrame(animateClassical);
             } else {
                 setIsSolving(false);
             }
         };
-        
+
         animationFrameId.current = requestAnimationFrame(animateClassical);
     };
 
@@ -176,14 +176,14 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                     setQuantumWave(prevWave => new Set([...prevWave, ...newWaveNodes]));
                 }
             }
-            
+
             if (!quantumFound.current) {
                 animationFrameId.current = requestAnimationFrame(animateQuantum);
             } else {
                 setIsSolving(false);
             }
         };
-        
+
         animationFrameId.current = requestAnimationFrame(animateQuantum);
     };
 
@@ -206,7 +206,7 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                 if (stack.length > 0) {
                     path = stack[stack.length - 1];
                     const current = path[path.length - 1];
-                    
+
                     if (current.row === END.row && current.col === END.col) {
                         classicalFound.current = true;
                         const endTime = performance.now();
@@ -272,7 +272,7 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                     setQuantumWave(prevWave => new Set([...prevWave, ...newWaveNodes]));
                 }
             }
-            
+
             if (!classicalFound.current || !quantumFound.current) {
                 animationFrameId.current = requestAnimationFrame(animate);
             } else {
@@ -284,7 +284,7 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
 
     const reset = () => {
         setIsSolving(false);
-        if(animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
         setClassicalPath([]);
         setClassicalDeadEnds(new Set());
         setClassicalSolution(null);
@@ -296,20 +296,20 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
     };
 
     const startSolving = (mode: 'both' | 'classical' | 'quantum' = 'both') => {
-        if(animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
-        
+        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+
         if (mode === 'both') {
             reset();
         }
-        
+
         classicalFound.current = false;
         quantumFound.current = false;
         setIsSolving(true);
         solveStartTime.current = performance.now();
         setSolvingMode(mode);
-        
+
         setTimeout(() => {
-            switch(mode) {
+            switch (mode) {
                 case 'classical':
                     solveClassical();
                     break;
@@ -340,19 +340,19 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
 
     useEffect(() => {
         return () => {
-            if(animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+            if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
         };
     }, []);
 
-    const classicalState = { 
-        classicalPath: (solvingMode === 'quantum') ? [] : classicalPath, 
+    const classicalState = {
+        classicalPath: (solvingMode === 'quantum') ? [] : classicalPath,
         classicalDeadEnds: classicalDeadEnds,
         classicalSolution: classicalSolution,
         quantumSolution: null,
         quantumWave: new Set<string>()
     };
-    
-    const quantumState = { 
+
+    const quantumState = {
         quantumWave: quantumWave,
         quantumSolution: quantumSolution,
         classicalSolution: null,
@@ -361,23 +361,27 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
     };
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-                <div className="text-center">
+        <div className="flex flex-col items-center w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl">
+                <div className="text-center w-full">
                     <h3 className="text-lg font-bold mb-2 text-quantum-primary">Computador Clássico</h3>
                     <p className="text-xs text-gray-400 mb-4 h-10">Explora um caminho de cada vez, testando e voltando em becos sem saída.</p>
-                    <MazeCanvasGrid state={classicalState} config={config} width={500} height={500} />
-                     {classicalSolution && (
+                    <div className="w-full flex justify-center">
+                        <MazeCanvasGrid state={classicalState} config={config} width={500} height={500} />
+                    </div>
+                    {classicalSolution && (
                         <div className="mt-4 text-sm text-gray-300 bg-gray-900/50 p-2 rounded-lg">
                             <p>Tempo: <span className="font-bold text-white">{(classicalStats.time / 1000).toFixed(2)} s</span></p>
                             <p>Distância: <span className="font-bold text-white">{classicalStats.distance} quadrados</span></p>
                         </div>
                     )}
                 </div>
-                <div className="text-center">
+                <div className="text-center w-full">
                     <h3 className="text-lg font-bold mb-2 text-quantum-accent">Computador Quântico</h3>
                     <p className="text-xs text-gray-400 mb-4 h-10">Graças à superposição, explora todos os caminhos simultaneamente para encontrar a solução.</p>
-                    <MazeCanvasGrid state={quantumState} config={config} width={500} height={500} />
+                    <div className="w-full flex justify-center">
+                        <MazeCanvasGrid state={quantumState} config={config} width={500} height={500} />
+                    </div>
                     {quantumSolution && (
                         <div className="mt-4 text-sm text-gray-300 bg-gray-900/50 p-2 rounded-lg">
                             <p>Tempo: <span className="font-bold text-white">{(quantumStats.time / 1000).toFixed(2)} s</span></p>
@@ -386,25 +390,25 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                     )}
                 </div>
             </div>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-center gap-2 md:gap-4 px-4">
                 <div className="flex flex-wrap justify-center gap-2">
-                    <button 
-                        onClick={() => startSolving('classical')} 
-                        disabled={isSolving} 
+                    <button
+                        onClick={() => startSolving('classical')}
+                        disabled={isSolving}
                         className="bg-quantum-primary hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-all disabled:bg-gray-500 text-sm"
                     >
                         Clássico
                     </button>
-                    <button 
-                        onClick={() => startSolving('both')} 
-                        disabled={isSolving} 
+                    <button
+                        onClick={() => startSolving('both')}
+                        disabled={isSolving}
                         className="bg-quantum-accent hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-full transition-all disabled:bg-gray-500 text-sm"
                     >
                         Ambos
                     </button>
-                    <button 
-                        onClick={() => startSolving('quantum')} 
-                        disabled={isSolving} 
+                    <button
+                        onClick={() => startSolving('quantum')}
+                        disabled={isSolving}
                         className="bg-quantum-accent hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-full transition-all disabled:bg-gray-500 text-sm"
                     >
                         Quântico

@@ -42,7 +42,7 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
         } else {
             console.warn('Web Workers are not supported in this browser');
         }
-        
+
         // Cleanup function
         return () => {
             if (quantumWorker.current) {
@@ -57,12 +57,12 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
         if (quantumWorker.current) {
             quantumWorker.current.onmessage = (event) => {
                 const message = event.data;
-                
+
                 switch (message.type) {
                     case 'wave-update':
                         pendingWaveNodes.current.push(...message.payload.newWaveNodes);
                         break;
-                        
+
                     case 'solution-found':
                         if (visualizerFrame.current) {
                             cancelAnimationFrame(visualizerFrame.current);
@@ -80,18 +80,18 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
                         }
 
                         setQuantumSolution(message.payload.solution);
-                        
-                        setQuantumStats(prev => ({ 
-                            solvedCount: prev.solvedCount + 1, 
+
+                        setQuantumStats(prev => ({
+                            solvedCount: prev.solvedCount + 1,
                             totalTime: prev.totalTime + message.payload.elapsedTime
                         }));
-                        
+
                         setTimeout(() => {
                             const newMaze = generateMaze(MEGA_MAZE_DIMENSIONS, MEGA_MAZE_DIMENSIONS);
                             setQuantumMaze(newMaze);
                             setQuantumWave(new Set());
                             setQuantumSolution(null);
-                            
+
                             setTimeout(() => {
                                 if (shouldContinueQuantum.current && isSolving) {
                                     if (quantumWorker.current) {
@@ -153,10 +153,10 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
         const { GRID, START, END, DIMENSIONS } = maze;
         const MAX_DIM = DIMENSIONS;
         const stack = [[START]];
-        
+
         const visitedArray = Array.from({ length: MAX_DIM }, () => new Array(MAX_DIM).fill(false));
         visitedArray[START.row][START.col] = true;
-        
+
         let path: { row: number, col: number }[] = [];
         let deadEnds = new Set<string>();
         let found = false;
@@ -176,9 +176,9 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
                     if (current.row === END.row && current.col === END.col) {
                         found = true;
                         const endTime = performance.now();
-                        
-                        setClassicalStats(prev => ({ 
-                            solvedCount: prev.solvedCount + 1, 
+
+                        setClassicalStats(prev => ({
+                            solvedCount: prev.solvedCount + 1,
                             totalTime: prev.totalTime + (endTime - classicalSolveStartTime.current)
                         }));
                         setClassicalSolution(path);
@@ -189,7 +189,7 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
                             setClassicalPath([]);
                             setClassicalDeadEnds(new Set());
                             setClassicalSolution(null);
-                            
+
                             setTimeout(() => {
                                 if (shouldContinueClassical.current && isSolving) {
                                     runClassicalSolver(newMaze); // Use the new maze
@@ -201,7 +201,7 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
 
                     const neighbors = [];
                     const { row, col } = current;
-                    
+
                     if (row > 0 && row < MAX_DIM - 1 && col > 0 && col < MAX_DIM - 1) {
                         if (GRID[row - 1][col] === 0 && !visitedArray[row - 1][col]) neighbors.push({ row: row - 1, col });
                         if (GRID[row + 1][col] === 0 && !visitedArray[row + 1][col]) neighbors.push({ row: row + 1, col });
@@ -222,7 +222,7 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
                         path.forEach(p => deadEnds.add(toId(p)));
                         stack.pop();
                     }
-                    
+
                     setClassicalPath([...path]);
                     setClassicalDeadEnds(new Set(deadEnds));
                 }
@@ -240,7 +240,7 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
     const startSolvers = (continuous: boolean) => {
         shouldContinueClassical.current = continuous;
         shouldContinueQuantum.current = continuous;
-        
+
         setClassicalPath([]);
         setClassicalDeadEnds(new Set());
         setClassicalSolution(null);
@@ -302,23 +302,23 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
     const quantumState = { quantumWave, quantumSolution, classicalPath: [], classicalDeadEnds: new Set(), classicalSolution: null };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-full">
             {/* Scoreboard */}
-            <div className="w-full max-w-6xl mb-4 p-4 bg-gray-900/50 rounded-lg">
-                <h2 className="text-xl font-bold text-center text-white mb-4">Placar em Tempo Real</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+            <div className="w-full max-w-6xl mb-4 p-3 md:p-4 bg-gray-900/50 rounded-lg">
+                <h2 className="text-lg md:text-xl font-bold text-center text-white mb-4">Placar em Tempo Real</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center text-sm md:text-base">
                     <div>
-                        <h3 className="text-lg font-bold text-quantum-primary">Computador Clássico</h3>
+                        <h3 className="text-base md:text-lg font-bold text-quantum-primary">Computador Clássico</h3>
                         <p>Labirintos Resolvidos: <span className="font-bold text-white">{classicalStats.solvedCount}</span></p>
                         <p>Tempo Médio: <span className="font-bold text-white">{(classicalAvgTime / 1000).toFixed(2)} s</span></p>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                         <h3 className="text-lg font-bold">Comparativo</h3>
+                        <h3 className="text-base md:text-lg font-bold">Comparativo</h3>
                         <p>Diferença de Velocidade: <span className="font-bold text-white">{speedDifference}</span></p>
                         <p>Diferença de Resoluções: <span className="font-bold text-white">{Math.abs(classicalStats.solvedCount - quantumStats.solvedCount)}</span></p>
                     </div>
                     <div>
-                        <h3 className="text-lg font-bold text-quantum-accent">Computador Quântico</h3>
+                        <h3 className="text-base md:text-lg font-bold text-quantum-accent">Computador Quântico</h3>
                         <p>Labirintos Resolvidos: <span className="font-bold text-white">{quantumStats.solvedCount}</span></p>
                         <p>Tempo Médio: <span className="font-bold text-white">{(quantumAvgTime / 1000).toFixed(2)} s</span></p>
                     </div>
@@ -326,19 +326,23 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
             </div>
 
             {/* Mazes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-                <div className="text-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl">
+                <div className="text-center w-full">
                     <h3 className="text-lg font-bold mb-2 text-quantum-primary">Clássico (50x50)</h3>
-                    <MazeCanvasGrid state={classicalState} config={classicalMaze} width={500} height={500} />
+                    <div className="w-full flex justify-center">
+                        <MazeCanvasGrid state={classicalState} config={classicalMaze} width={500} height={500} />
+                    </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center w-full">
                     <h3 className="text-lg font-bold mb-2 text-quantum-accent">Quântico (50x50)</h3>
-                    <MazeCanvasGrid state={quantumState} config={quantumMaze} width={500} height={500} />
+                    <div className="w-full flex justify-center">
+                        <MazeCanvasGrid state={quantumState} config={quantumMaze} width={500} height={500} />
+                    </div>
                 </div>
             </div>
 
             {/* Buttons */}
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-center gap-2 md:gap-4 px-4">
                 <button onClick={() => {
                     const newContinuous = !isContinuous;
                     setIsContinuous(newContinuous);
