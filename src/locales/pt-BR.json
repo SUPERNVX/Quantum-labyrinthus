@@ -1,0 +1,64 @@
+{
+  "header": {
+    "title": "Labirintos Quânticos",
+    "subtitle": "Explorando a superposição quântica através da resolução de labirintos",
+    "footer": "Aplicações da Superposição Quântica"
+  },
+  "applications": {
+    "title": "Aplicações da",
+    "titleSpan": "Superposição",
+    "description": "Tecnologias que exploram as propriedades quânticas da matéria. Clique para interagir."
+  },
+  "quantumMaze": {
+    "classical": {
+      "title": "Computador Clássico",
+      "description": "Explora um caminho de cada vez, testando e voltando em becos sem saída."
+    },
+    "quantum": {
+      "title": "Computador Quântico",
+      "description": "Graças à superposição, explora todos os caminhos simultaneamente para encontrar a solução."
+    },
+    "buttons": {
+      "classical": "Clássico",
+      "both": "Ambos",
+      "quantum": "Quântico",
+      "reset": "Resetar",
+      "decreaseMaze": "Diminuir Labirinto",
+      "increaseMaze": "Aumentar Labirinto"
+    },
+    "stats": {
+      "time": "Tempo:",
+      "distance": "Distância:",
+      "unit": "quadrados"
+    }
+  },
+  "megaMaze": {
+    "scoreboard": "Placar em Tempo Real",
+    "classical": {
+      "title": "Computador Clássico",
+      "solved": "Labirintos Resolvidos:",
+      "avgTime": "Tempo Médio:"
+    },
+    "comparison": {
+      "title": "Comparativo",
+      "speedDiff": "Diferença de Velocidade:",
+      "resolutionDiff": "Diferença de Resoluções:"
+    },
+    "quantum": {
+      "title": "Computador Quântico",
+      "solved": "Labirintos Resolvidos:",
+      "avgTime": "Tempo Médio:"
+    },
+    "buttons": {
+      "continuous": "Contínuo",
+      "startContinuous": "Iniciar Contínuo",
+      "stopContinuous": "Parar Contínuo",
+      "startSingle": "Começar (1x)",
+      "reset": "Resetar",
+      "decreaseMaze": "Diminuir Labirinto"
+    }
+  },
+  "language": {
+    "switcher": "Idioma"
+  }
+}

@@ -1,10 +1,12 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { generateMaze, MazeConfig, toId } from './mazeUtils';
 import { MazeCanvasGrid } from './MazeCanvasGrid';
 
 const MEGA_MAZE_DIMENSIONS = 50;
 
 const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }) => {
+    const { t } = useTranslation();
     // Maze configurations
     const [classicalMaze, setClassicalMaze] = useState<MazeConfig>(() => generateMaze(MEGA_MAZE_DIMENSIONS, MEGA_MAZE_DIMENSIONS));
     const [quantumMaze, setQuantumMaze] = useState<MazeConfig>(() => generateMaze(MEGA_MAZE_DIMENSIONS, MEGA_MAZE_DIMENSIONS));
@@ -305,22 +307,22 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
         <div className="flex flex-col items-center w-full">
             {/* Scoreboard */}
             <div className="w-full max-w-6xl mb-4 p-3 md:p-4 bg-gray-900/50 rounded-lg">
-                <h2 className="text-lg md:text-xl font-bold text-center text-white mb-4">Placar em Tempo Real</h2>
+                <h2 className="text-lg md:text-xl font-bold text-center text-white mb-4">{t('megaMaze.scoreboard')}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center text-sm md:text-base">
                     <div>
-                        <h3 className="text-base md:text-lg font-bold text-quantum-primary">Computador Clássico</h3>
-                        <p>Labirintos Resolvidos: <span className="font-bold text-white">{classicalStats.solvedCount}</span></p>
-                        <p>Tempo Médio: <span className="font-bold text-white">{(classicalAvgTime / 1000).toFixed(2)} s</span></p>
+                        <h3 className="text-base md:text-lg font-bold text-quantum-primary">{t('megaMaze.classical.title')}</h3>
+                        <p>{t('megaMaze.classical.solved')} <span className="font-bold text-white">{classicalStats.solvedCount}</span></p>
+                        <p>{t('megaMaze.classical.avgTime')} <span className="font-bold text-white">{(classicalAvgTime / 1000).toFixed(2)} s</span></p>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <h3 className="text-base md:text-lg font-bold">Comparativo</h3>
-                        <p>Diferença de Velocidade: <span className="font-bold text-white">{speedDifference}</span></p>
-                        <p>Diferença de Resoluções: <span className="font-bold text-white">{Math.abs(classicalStats.solvedCount - quantumStats.solvedCount)}</span></p>
+                        <h3 className="text-base md:text-lg font-bold">{t('megaMaze.comparison.title')}</h3>
+                        <p>{t('megaMaze.comparison.speedDiff')} <span className="font-bold text-white">{speedDifference}</span></p>
+                        <p>{t('megaMaze.comparison.resolutionDiff')} <span className="font-bold text-white">{Math.abs(classicalStats.solvedCount - quantumStats.solvedCount)}</span></p>
                     </div>
                     <div>
-                        <h3 className="text-base md:text-lg font-bold text-quantum-accent">Computador Quântico</h3>
-                        <p>Labirintos Resolvidos: <span className="font-bold text-white">{quantumStats.solvedCount}</span></p>
-                        <p>Tempo Médio: <span className="font-bold text-white">{(quantumAvgTime / 1000).toFixed(2)} s</span></p>
+                        <h3 className="text-base md:text-lg font-bold text-quantum-accent">{t('megaMaze.quantum.title')}</h3>
+                        <p>{t('megaMaze.quantum.solved')} <span className="font-bold text-white">{quantumStats.solvedCount}</span></p>
+                        <p>{t('megaMaze.quantum.avgTime')} <span className="font-bold text-white">{(quantumAvgTime / 1000).toFixed(2)} s</span></p>
                     </div>
                 </div>
             </div>
@@ -328,13 +330,13 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
             {/* Mazes */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl">
                 <div className="text-center w-full">
-                    <h3 className="text-lg font-bold mb-2 text-quantum-primary">Clássico (50x50)</h3>
+                    <h3 className="text-lg font-bold mb-2 text-quantum-primary">{t('megaMaze.classical.title')} (50x50)</h3>
                     <div className="w-full flex justify-center">
                         <MazeCanvasGrid state={classicalState} config={classicalMaze} width={500} height={500} />
                     </div>
                 </div>
                 <div className="text-center w-full">
-                    <h3 className="text-lg font-bold mb-2 text-quantum-accent">Quântico (50x50)</h3>
+                    <h3 className="text-lg font-bold mb-2 text-quantum-accent">{t('megaMaze.quantum.title')} (50x50)</h3>
                     <div className="w-full flex justify-center">
                         <MazeCanvasGrid state={quantumState} config={quantumMaze} width={500} height={500} />
                     </div>
@@ -358,7 +360,7 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
                         shouldContinueQuantum.current = false;
                     }
                 }} className={`font-bold py-2 px-6 rounded-full transition-colors ${isContinuous ? 'bg-red-500 hover:bg-red-400' : 'bg-green-500 hover:bg-green-400'} text-white`}>
-                    {isContinuous ? 'Parar Contínuo' : 'Iniciar Contínuo'}
+                    {isContinuous ? t('megaMaze.buttons.stopContinuous') : t('megaMaze.buttons.startContinuous')}
                 </button>
                 <button onClick={() => {
                     setIsContinuous(false);
@@ -366,13 +368,13 @@ const MegaMaze: React.FC<{ showQuantumMaze: () => void }> = ({ showQuantumMaze }
                         setIsSolving(true);
                     }
                 }} disabled={isSolving} className="bg-quantum-primary hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full disabled:bg-gray-500">
-                    Começar (1x)
+                    {t('megaMaze.buttons.startSingle')}
                 </button>
                 <button onClick={resetAll} className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-full">
-                    Resetar
+                    {t('megaMaze.buttons.reset')}
                 </button>
                 <button onClick={showQuantumMaze} className="bg-quantum-secondary hover:bg-indigo-400 text-white font-bold py-2 px-6 rounded-full">
-                    Diminuir Labirinto
+                    {t('megaMaze.buttons.decreaseMaze')}
                 </button>
             </div>
         </div>

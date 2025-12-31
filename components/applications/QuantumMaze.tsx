@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // --- MAZE CONFIGURATIONS ---
 
@@ -57,6 +58,7 @@ import { MazeCanvasGrid } from './MazeCanvasGrid';
 import { toId } from './mazeUtils';
 
 const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) => {
+    const { t } = useTranslation();
     const [mazeSize, setMazeSize] = useState<'small' | 'large'>('small');
     const [isSolving, setIsSolving] = useState(false);
     const [classicalPath, setClassicalPath] = useState<{ row: number, col: number }[]>([]);
@@ -364,28 +366,28 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
         <div className="flex flex-col items-center w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-6xl">
                 <div className="text-center w-full">
-                    <h3 className="text-lg font-bold mb-2 text-quantum-primary">Computador Clássico</h3>
-                    <p className="text-xs text-gray-400 mb-4 h-10">Explora um caminho de cada vez, testando e voltando em becos sem saída.</p>
+                    <h3 className="text-lg font-bold mb-2 text-quantum-primary">{t('quantumMaze.classical.title')}</h3>
+                    <p className="text-xs text-gray-400 mb-4 h-10">{t('quantumMaze.classical.description')}</p>
                     <div className="w-full flex justify-center">
                         <MazeCanvasGrid state={classicalState} config={config} width={500} height={500} />
                     </div>
                     {classicalSolution && (
                         <div className="mt-4 text-sm text-gray-300 bg-gray-900/50 p-2 rounded-lg">
-                            <p>Tempo: <span className="font-bold text-white">{(classicalStats.time / 1000).toFixed(2)} s</span></p>
-                            <p>Distância: <span className="font-bold text-white">{classicalStats.distance} quadrados</span></p>
+                            <p>{t('quantumMaze.stats.time')} <span className="font-bold text-white">{(classicalStats.time / 1000).toFixed(2)} s</span></p>
+                            <p>{t('quantumMaze.stats.distance')} <span className="font-bold text-white">{classicalStats.distance} {t('quantumMaze.stats.unit')}</span></p>
                         </div>
                     )}
                 </div>
                 <div className="text-center w-full">
-                    <h3 className="text-lg font-bold mb-2 text-quantum-accent">Computador Quântico</h3>
-                    <p className="text-xs text-gray-400 mb-4 h-10">Graças à superposição, explora todos os caminhos simultaneamente para encontrar a solução.</p>
+                    <h3 className="text-lg font-bold mb-2 text-quantum-accent">{t('quantumMaze.quantum.title')}</h3>
+                    <p className="text-xs text-gray-400 mb-4 h-10">{t('quantumMaze.quantum.description')}</p>
                     <div className="w-full flex justify-center">
                         <MazeCanvasGrid state={quantumState} config={config} width={500} height={500} />
                     </div>
                     {quantumSolution && (
                         <div className="mt-4 text-sm text-gray-300 bg-gray-900/50 p-2 rounded-lg">
-                            <p>Tempo: <span className="font-bold text-white">{(quantumStats.time / 1000).toFixed(2)} s</span></p>
-                            <p>Distância: <span className="font-bold text-white">{quantumStats.distance} quadrados</span></p>
+                            <p>{t('quantumMaze.stats.time')} <span className="font-bold text-white">{(quantumStats.time / 1000).toFixed(2)} s</span></p>
+                            <p>{t('quantumMaze.stats.distance')} <span className="font-bold text-white">{quantumStats.distance} {t('quantumMaze.stats.unit')}</span></p>
                         </div>
                     )}
                 </div>
@@ -397,33 +399,33 @@ const QuantumMaze: React.FC<{ showMegaMaze: () => void }> = ({ showMegaMaze }) =
                         disabled={isSolving}
                         className="bg-quantum-primary hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-all disabled:bg-gray-500 text-sm"
                     >
-                        Clássico
+                        {t('quantumMaze.buttons.classical')}
                     </button>
                     <button
                         onClick={() => startSolving('both')}
                         disabled={isSolving}
                         className="bg-quantum-accent hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-full transition-all disabled:bg-gray-500 text-sm"
                     >
-                        Ambos
+                        {t('quantumMaze.buttons.both')}
                     </button>
                     <button
                         onClick={() => startSolving('quantum')}
                         disabled={isSolving}
                         className="bg-quantum-accent hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-full transition-all disabled:bg-gray-500 text-sm"
                     >
-                        Quântico
+                        {t('quantumMaze.buttons.quantum')}
                     </button>
                 </div>
                 <button onClick={reset} className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-full transition-all">
-                    Resetar
+                    {t('quantumMaze.buttons.reset')}
                 </button>
                 {mazeSize === 'large' && (
                     <button onClick={decreaseMaze} className="bg-quantum-secondary hover:bg-indigo-400 text-white font-bold py-2 px-6 rounded-full transition-all">
-                        Diminuir Labirinto
+                        {t('quantumMaze.buttons.decreaseMaze')}
                     </button>
                 )}
                 <button onClick={increaseMaze} className="bg-quantum-secondary hover:bg-indigo-400 text-white font-bold py-2 px-6 rounded-full transition-all">
-                    Aumentar Labirinto
+                    {t('quantumMaze.buttons.increaseMaze')}
                 </button>
             </div>
         </div>

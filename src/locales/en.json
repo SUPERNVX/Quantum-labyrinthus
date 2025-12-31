@@ -1,0 +1,64 @@
+{
+  "header": {
+    "title": "Quantum Labyrinths",
+    "subtitle": "Exploring quantum superposition through maze solving",
+    "footer": "Applications of Quantum Superposition"
+  },
+  "applications": {
+    "title": "Applications of",
+    "titleSpan": "Superposition",
+    "description": "Technologies that explore the quantum properties of matter. Click to interact."
+  },
+  "quantumMaze": {
+    "classical": {
+      "title": "Classical Computer",
+      "description": "Explores one path at a time, testing and backtracking from dead ends."
+    },
+    "quantum": {
+      "title": "Quantum Computer",
+      "description": "Thanks to superposition, explores all paths simultaneously to find the solution."
+    },
+    "buttons": {
+      "classical": "Classical",
+      "both": "Both",
+      "quantum": "Quantum",
+      "reset": "Reset",
+      "decreaseMaze": "Decrease Maze",
+      "increaseMaze": "Increase Maze"
+    },
+    "stats": {
+      "time": "Time:",
+      "distance": "Distance:",
+      "unit": "squares"
+    }
+  },
+  "megaMaze": {
+    "scoreboard": "Real-time Scoreboard",
+    "classical": {
+      "title": "Classical Computer",
+      "solved": "Mazes Solved:",
+      "avgTime": "Average Time:"
+    },
+    "comparison": {
+      "title": "Comparison",
+      "speedDiff": "Speed Difference:",
+      "resolutionDiff": "Resolution Difference:"
+    },
+    "quantum": {
+      "title": "Quantum Computer",
+      "solved": "Mazes Solved:",
+      "avgTime": "Average Time:"
+    },
+    "buttons": {
+      "continuous": "Continuous",
+      "startContinuous": "Start Continuous",
+      "stopContinuous": "Stop Continuous",
+      "startSingle": "Start (1x)",
+      "reset": "Reset",
+      "decreaseMaze": "Decrease Maze"
+    }
+  },
+  "language": {
+    "switcher": "Language"
+  }
+}

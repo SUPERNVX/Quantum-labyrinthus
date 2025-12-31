@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import QuantumMaze from './applications/QuantumMaze';
 import MegaMaze from './applications/MegaMaze';
 
 type MazeView = 'quantum' | 'mega';
 
 const ApplicationsSection: React.FC = () => {
+    const { t } = useTranslation();
     const [currentView, setCurrentView] = useState<MazeView>('quantum');
 
     const showQuantumMaze = () => setCurrentView('quantum');
@@ -14,8 +16,8 @@ const ApplicationsSection: React.FC = () => {
         <section id="aplicacoes" className="py-20 bg-gradient-to-r from-gray-800 to-quantum-dark">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Aplicações da <span className="text-quantum-accent">Superposição</span></h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">Tecnologias que exploram as propriedades quânticas da matéria. Clique para interagir.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('applications.title')} <span className="text-quantum-accent">{t('applications.titleSpan')}</span></h2>
+                    <p className="text-gray-400 max-w-2xl mx-auto">{t('applications.description')}</p>
                     <div className="w-20 h-1 bg-quantum-accent mx-auto mt-4"></div>
                 </div>
 
